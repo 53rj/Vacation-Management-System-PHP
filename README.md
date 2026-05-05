@@ -112,5 +112,9 @@ Before production use, improvements would be required:
 ## 📌 Disclaimer
 
 This project was created as part of a training program and is not intended for production use.
-Marco Wedemeyer
-Civan Adam
+
+
+## 💻 Authors
+- Marco Wedemeyer
+- Civan Adam
+- Sergiy Stümpel
