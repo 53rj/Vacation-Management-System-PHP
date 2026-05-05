@@ -4,13 +4,6 @@ A web-based application for managing vacation requests, sick leave, and employee
 
 ---
 
-## 📸 Preview
-
-<!-- Add screenshot here -->
-<!-- Example: ![Dashboard](./screenshots/dashboard.png) -->
-
----
-
 ## ✨ Features
 
 - Role-based access control:
