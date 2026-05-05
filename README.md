@@ -1,68 +1,108 @@
-# Vacation Management System (PHP)
+# 🚀 Vacation Management System (PHP)
 
-A small **PHP** web application for tracking annual leave, leave requests, and sick-leave records. The user interface is **German**; this document is in English for broader readability.
+A web-based application for managing vacation requests, sick leave, and employee data with role-based access control.
 
-The app was built as a class project (see `meta.html` for authors: Sergiy Stümpel, Marco Wedemeyer, Civan Adam) and targets a fictional “IT-Solutions GmbH” vacation workflow.
+---
 
-## Features
+## 📸 Preview
 
-- **Authentication** with PHP sessions; passwords stored with `password_hash()` / verified with `password_verify()` (`login.php`).
-- **Role-based access** (stored in `personal.status`):
-  - **Angestellter** (employee): dashboard, submit vacation requests.
-  - **Abteilungsleiter** (department lead): same as employee, plus approve/reject pending requests and register sick leave (AU) for staff by personnel ID.
-  - **Admin**: same as employee, plus register new users and browse/edit core tables (personnel, vacation requests, sick leave).
-- **Vacation requests** (`uantrag.php`): date range → working days counted (weekends excluded via SQL in `f_function.php`).
-- **Leave balance** (`resturlaub`): updated when requests are approved; sick-leave logic can adjust balances when periods overlap approved vacation.
-- **Admin data views** (`udbv.php`): switch between personnel, vacation, and sickness tables (`?table=1|2|3`) with linked edit/update/delete flows.
+<!-- Add screenshot here -->
+<!-- Example: ![Dashboard](./screenshots/dashboard.png) -->
 
-## Requirements
+---
 
-- **PHP** 7.4+ (8.x used in original export) with extensions: `pdo_mysql`, `session`, `json` (typical PHP–MySQL stack).
-- **MySQL** or **MariaDB** (dump created with MariaDB 10.4 / phpMyAdmin).
+## ✨ Features
 
-No Composer or Node build step; assets are plain HTML, CSS, and a small `registration.js`.
+- Role-based access control:
+  - **Employee:** submit vacation requests and view dashboard  
+  - **Department Lead:** approve/reject requests and register sick leave  
+  - **Admin:** manage users and maintain core data tables  
+- Vacation request system with automatic working-day calculation (weekends excluded via SQL)  
+- Approval workflow for vacation requests  
+- Sick leave tracking with overlap handling (adjusts vacation balance if necessary)  
+- Admin dashboard with full CRUD functionality (personnel, vacation, sickness)  
+- Secure authentication using PHP sessions and password hashing (`password_hash`, `password_verify`)  
 
-## Installation
+---
 
-1. **Clone** this repository and point your web server document root (or a virtual host) at the project directory.
+## 🧠 What I Learned
 
-2. **Create the database** and import the schema plus sample data:
+- Building full-stack applications using PHP and MySQL  
+- Designing role-based access and permission systems  
+- Implementing business logic using SQL (e.g. working-day calculations)  
+- Handling edge cases such as overlapping vacation and sick leave  
+- Structuring applications into reusable and maintainable components  
 
-   ```bash
-   mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS urlaubsverwaltung CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;"
-   mysql -u root -p urlaubsverwaltung < urlaubsverwaltung.sql
-   ```
+---
 
-3. **Configure database credentials** in code. The default connection uses `localhost`, database `urlaubsverwaltung`, user `root`, and an **empty** password (`connServer()` in `f_function.php`). The same DSN pattern appears in other files (e.g. `register.php`, `udbv.php`); adjust **every** occurrence if you change user, password, or host.
+## 🛠 Tech Stack
 
-4. Open **`login.php`** in the browser (not `index.php` without a session—you will be redirected to login).
+- **Backend:** PHP (PDO)  
+- **Database:** MySQL / MariaDB  
+- **Frontend:** HTML, CSS, JavaScript  
 
-### Sample data
+---
 
-`urlaubsverwaltung.sql` contains example users with **bcrypt** hashes. To log in you need the plaintext passwords used when those accounts were created, or create a new admin user by importing/updating the database accordingly.
+## ⚙️ Setup
 
-## Project layout (main entry points)
+### 1. Clone repository
+```bash
+git clone <your-repo-url>
+cd urlaubsverwaltung
+```
 
-| File | Purpose |
-|------|---------|
-| `login.php` / `login.html` | Login |
-| `logout.php` | End session |
-| `index.php` | Dashboard: remaining leave, approved/pending/rejected requests |
-| `uantrag.php` | Submit vacation request |
-| `ugenehmigen.php` | Department lead: pending requests, approve/deny |
-| `keintrag.php` | Department lead: sick-leave entry for a given `pid` |
-| `register.php` / `register.html` | Admin: register users (`registration.js` confirmation step) |
-| `udbv.php` | Admin: table overview + links to `personaltabelle.php`, `urlaubstabelle.php`, `krankheitstabelle.php` |
-| `f_function.php` | PDO connection, session guard (`checkStatus`), core business SQL |
-| `*_header.html` | Role-specific navigation shell |
-| `style.css` | Styling |
+### 2.Create database
+```bash
+mysql -u root -p -e "CREATE DATABASE urlaubsverwaltung CHARACTER SET utf8mb4;"
+```
 
-Edit/update/delete scripts (`edit_*.php`, `update_*.php`, `delete_eintrag.php`) support admin maintenance of records.
+### 3. Import schema
+```bash
+mysql -u root -p urlaubsverwaltung < urlaubsverwaltung.sql
+```
 
-## Security note (production)
+### 4. Configure database connection
 
-This repository is suitable for **learning or internal demos**. Before any production use you should at least: use strong DB credentials, HTTPS, centralized configuration, parameterized queries everywhere, CSRF protection on forms, and a proper password policy. Some legacy helpers in `f_function.php` (e.g. unused `login()` posting raw values into SQL) must not be used as a security reference; the actual login path is `login.php`, which uses prepared statements and `password_verify`.
+Update credentials in:
 
-## License
+f_function.php (main connection via connServer())
+register.php
+udbv.php
 
-No license file is included in the repository. If you reuse the code, clarify ownership and terms with the original authors.
+5. Start application
+
+Open in browser:
+```
+http://localhost/login.php
+```
+
+📂 Project Structure
+File	Description
+login.php	Authentication system
+index.php	Dashboard (leave balance, requests overview)
+uantrag.php	Submit vacation requests
+ugenehmigen.php	Approve/reject requests (department lead)
+keintrag.php	Register sick leave
+register.php	User registration (admin)
+udbv.php	Admin data view (personnel, vacation, sickness tables)
+f_function.php	Core logic, session handling, SQL queries
+🔐 Security Notes
+
+This project was built for learning purposes.
+
+Before production use, improvements would be required:
+
+Centralized configuration (no hardcoded DB credentials)
+CSRF protection
+Strict use of prepared statements
+Secure password policies
+
+
+📌 Disclaimer
+
+This project was created as part of a training program and is not intended for production use.
+
+👨‍💻 Authors
+Sergiy Stümpel
+Marco Wedemeyer
+Civan Adam
