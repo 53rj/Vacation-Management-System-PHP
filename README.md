@@ -65,44 +65,52 @@ mysql -u root -p urlaubsverwaltung < urlaubsverwaltung.sql
 
 Update credentials in:
 
-f_function.php (main connection via connServer())
-register.php
-udbv.php
+- `f_function.php` (main connection via `connServer()`)
+- `register.php`
+- `udbv.php`
 
-5. Start application
+---
+
+### 5. Start application
 
 Open in browser:
-```
+
+```text
 http://localhost/login.php
 ```
 
-📂 Project Structure
-File	Description
-login.php	Authentication system
-index.php	Dashboard (leave balance, requests overview)
-uantrag.php	Submit vacation requests
-ugenehmigen.php	Approve/reject requests (department lead)
-keintrag.php	Register sick leave
-register.php	User registration (admin)
-udbv.php	Admin data view (personnel, vacation, sickness tables)
-f_function.php	Core logic, session handling, SQL queries
-🔐 Security Notes
+---
+
+## 📂 Project Structure
+
+| File | Description |
+|------|------------|
+| `login.php` | Authentication system |
+| `index.php` | Dashboard (leave balance, requests overview) |
+| `uantrag.php` | Submit vacation requests |
+| `ugenehmigen.php` | Approve/reject requests (department lead) |
+| `keintrag.php` | Register sick leave |
+| `register.php` | User registration (admin) |
+| `udbv.php` | Admin data view (personnel, vacation, sickness tables) |
+| `f_function.php` | Core logic, session handling, SQL queries |
+
+---
+
+## 🔐 Security Notes
 
 This project was built for learning purposes.
 
 Before production use, improvements would be required:
 
-Centralized configuration (no hardcoded DB credentials)
-CSRF protection
-Strict use of prepared statements
-Secure password policies
+- Centralized configuration (no hardcoded DB credentials)  
+- CSRF protection  
+- Strict use of prepared statements  
+- Secure password policies  
 
+---
 
-📌 Disclaimer
+## 📌 Disclaimer
 
 This project was created as part of a training program and is not intended for production use.
-
-👨‍💻 Authors
-Sergiy Stümpel
 Marco Wedemeyer
 Civan Adam
